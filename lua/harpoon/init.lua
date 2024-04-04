@@ -169,6 +169,14 @@ function Harpoon.setup(self, partial_config)
             end,
         })
 
+        vim.api.nvim_create_autocmd({ "DirChanged" }, {
+            group = HarpoonGroup,
+            callback = function()
+                require("harpoon").logger:log("reset by DirChanged")
+                require("harpoon"):setup()
+            end,
+        })
+
         self.hooks_setup = true
     end
 
